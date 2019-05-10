@@ -1,7 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../services/user.service";
-import {Router} from "@angular/router";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('passwordElement') passwordElement: ElementRef;
 
   constructor(private formBuild: FormBuilder,
-              private userService: UserService,
+              private authenticationService: AuthenticationService,
               private router: Router) {
   }
 
@@ -48,22 +48,22 @@ export class RegisterComponent implements OnInit {
   }
 
   passIsVisible(): void {
-    if(this.passVisible) {
-      this.passwordElement.nativeElement.type = 'password'
+    if (this.passVisible) {
+      this.passwordElement.nativeElement.type = 'password';
     } else {
-      this.passwordElement.nativeElement.type = 'text'
+      this.passwordElement.nativeElement.type = 'text';
     }
     this.passVisible = !this.passVisible;
   }
 
   onSubmit(): void {
     this.submited = true;
-    this.userService.register({
-      'email': this.email.value,
-      'password': this.password.value,
-      'firstName': this.firstName.value,
-      'lastName': this.lastName.value,
-      'roles': ['DEFAULT_USER','ADMIN_USER'],
+    this.authenticationService.register({
+      email: this.email.value,
+      password: this.password.value,
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      roles: ['DEFAULT_USER', 'ADMIN_USER'],
     });
 
     this.router.navigate(['/login']);
