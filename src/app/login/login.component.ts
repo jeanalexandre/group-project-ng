@@ -1,8 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { catchError, finalize, first, take } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+import { throwError } from 'rxjs';
 
 
 @Component({
@@ -25,7 +27,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService,
   ) {
   }
 
@@ -72,14 +75,18 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.authenticationService.login(this.email.value, this.password.value)
-      .pipe(first())
+      .pipe(
+        catchError( err => {
+          this.toastr.error(err);
+          return throwError(err);
+        }),
+        finalize( () => {
+          this.loading = false;
+      }))
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
+          // this.router.navigate([this.returnUrl]);
+          this.toastr.success('Bonjour !');
         });
   }
 }
