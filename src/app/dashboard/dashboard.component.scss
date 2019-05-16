@@ -1,0 +1,36 @@
+.dashboard-content{
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+
+  .top-components {
+    width: 100%;
+    height: 50%;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    .stations-form-component {
+      width: 50%;
+      height: 100%;
+    }
+
+    .stations-list-component {
+      width: 50%;
+      height: 100%;
+    }
+
+  }
+
+  .bottom-component {
+    width: 100%;
+    height: 50%;
+
+    .station-detail-component {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
