@@ -23,24 +23,16 @@ export class AuthenticationService {
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.apiBaseUrl}/auth/login`, {email, password})
       .pipe(map(res => {
-        const token = res.token;
+        const user: User = res.me;
+
         // login successful if there's a jwt token in the response
-        if (res && token) {
+        if (res && res.token && user) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('userToken', JSON.stringify(token));
-          // this.currentUserSubject.next(res.token);
+          user.token = res.token;
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
         }
-        return token;
-        // const user: User = res.userDto;
-        //
-        // // login successful if there's a jwt token in the response
-        // if (res && res.token) {
-        //   // store user details and jwt token in local storage to keep user logged in between page refreshes
-        //   user.token = res.token;
-        //   localStorage.setItem('currentUser', JSON.stringify(user));
-        //   this.currentUserSubject.next(user);
-        // }
-        // return user;
+        return user;
       }));
   }
 

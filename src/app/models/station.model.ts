@@ -1,7 +1,7 @@
 export class Station {
   constructor(
     public uid?: string,
-    public classroom?: string,
+    public idClassroom?: string,
     public alive?: boolean
   ) {
   }

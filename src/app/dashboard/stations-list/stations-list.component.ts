@@ -11,8 +11,8 @@ export class StationsListComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  dataSource;
-  displayedColumns: string[] = ['uid', 'classroom', 'alive'];
+  public dataSource;
+  public displayedColumns: string[] = ['uid', 'classroom', 'alive'];
 
   constructor(private stationService: StationService) {
   }

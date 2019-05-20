@@ -1,3 +1,31 @@
-<p>
-  stations-form works!
-</p>
+<mat-card class="card-form">
+  <mat-card-header class="title-card">
+    <mat-card-title>{{title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="card-content">
+    <form [formGroup]="stationForm" (ngSubmit)="onSubmit()" class="station-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>UID</mat-label>
+        <input matInput type="text" formControlName="uid" required>
+        <mat-hint align="end">UID de la station</mat-hint>
+        <mat-error *ngIf="uid.hasError('required')">Veuillez renseigner l'UID</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Classroom</mat-label>
+        <mat-select formControlName="classroom" required>
+          <mat-option *ngFor="let classroom of classrooms" [value]="classroom.id">
+            {{classroom.name}} - {{classroom.batiment}} - {{classroom.adresse}}
+          </mat-option>
+        </mat-select>
+        <mat-hint align="end">Salle de la station</mat-hint>
+        <mat-error *ngIf="classroom.hasError('required')">Veuillez renseigner la salle</mat-error>
+      </mat-form-field>
+      <div class="action-form">
+        <button mat-raised-button class="reset-btn" type="reset">Annuler</button>
+        <button mat-raised-button [disabled]="uid.hasError('required') || classroom.hasError('required')"
+                color="primary" type="submit">Ajouter
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
