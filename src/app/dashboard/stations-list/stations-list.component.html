@@ -1,3 +1,31 @@
-<p>
-  stations-list works!
-</p>
+<mat-card class="card-list">
+  <mat-card-header class="title-card">
+    <mat-card-title>LISTE DES STATIONS</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content-card">
+    <table mat-table [dataSource]="dataSource" matSort class="table-stations">
+      <ng-container matColumnDef="uid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>UID</th>
+        <td mat-cell *matCellDef="let station">{{station.uid}}</td>
+      </ng-container>
+      <ng-container matColumnDef="classroom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ClassRoom</th>
+        <td mat-cell *matCellDef="let station">{{station.classroom}}</td>
+      </ng-container>
+      <ng-container matColumnDef="alive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let station">
+          <span *ngIf="station.alive; else notAlive">
+            <mat-icon class="is-alive">check_circle_outline</mat-icon>
+          </span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #notAlive>
+  <mat-icon class="is-not-alive">highlight_off</mat-icon>
+</ng-template>
