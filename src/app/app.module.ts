@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { NavbarModule } from './navbar/navbar.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
       progressBar: true,
       timeOut: 3000,
     }),
+    NavbarModule,
   ],
   exports: [
     MaterialModule,

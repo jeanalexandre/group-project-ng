@@ -4,7 +4,7 @@ import {
   MatCheckboxModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatSelectModule, MatSortModule, MatTableModule
+  MatInputModule, MatSelectModule, MatSortModule, MatTableModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatSortModule,
     MatSelectModule,
+    MatToolbarModule,
+    MatTooltipModule,
   ],
   exports: [
     MatButtonModule,
@@ -35,6 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatSortModule,
     MatSelectModule,
+    MatToolbarModule,
+    MatTooltipModule,
   ],
 })
 export class MaterialModule { }
