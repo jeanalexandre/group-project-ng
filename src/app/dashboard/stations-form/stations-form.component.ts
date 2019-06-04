@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { StationService } from '../../services/station.service';
-import { Station } from '../../models/station.model';
 import { ClassroomService } from '../../services/classroom.service';
 import { Classroom } from '../../models/classroom.model';
 
@@ -41,7 +40,20 @@ export class StationsFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.stationService.createStation(new Station(this.uid.value, this.classroom.value));
+    if (this.stationService.createStation({uid: this.uid.value, idClassroom: this.classroom.value})) {
+      this.stationForm.reset();
+      this.resetForm(this.stationForm);
+    }
+  }
+
+  resetForm(formGroup: FormGroup) {
+    let control: AbstractControl = null;
+    formGroup.reset();
+    formGroup.markAsUntouched();
+    Object.keys(formGroup.controls).forEach((name) => {
+      control = formGroup.controls[name];
+      control.setErrors(null);
+    });
   }
 
 }

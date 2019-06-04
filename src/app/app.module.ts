@@ -10,10 +10,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { NavbarModule } from './navbar/navbar.module';
+import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    BottomSheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,11 @@ import { NavbarModule } from './navbar/navbar.module';
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [
+    BottomSheetComponent,
+  ],
+  bootstrap: [
+    AppComponent,
+  ],
 })
 export class AppModule { }

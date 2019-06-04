@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
-          this.toastr.success('Bonjour !');
+          this.toastr.show(`Bonjour ${data.firstName} !`);
         });
   }
 }

@@ -1,4 +1,5 @@
 import {
+  MatBottomSheetModule,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatBottomSheetModule,
   ],
   exports: [
     MatButtonModule,
@@ -39,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatBottomSheetModule,
   ],
 })
 export class MaterialModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StationService } from '../../services/station.service';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatBottomSheet, MatSort } from '@angular/material';
+import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
+import { Station } from '../../models/station.model';
 
 @Component({
   selector: 'app-stations-list',
@@ -12,15 +14,26 @@ export class StationsListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public dataSource;
-  public displayedColumns: string[] = ['uid', 'classroom', 'alive'];
+  public displayedColumns: string[] = ['uid', 'classroom', 'alive', 'modifier', 'supprimer'];
 
-  constructor(private stationService: StationService) {
+  constructor(private stationService: StationService,
+              private bottomSheet: MatBottomSheet) {
   }
 
   ngOnInit() {
-    this.stationService.getStations().subscribe(stations => {
-      this.dataSource = new MatTableDataSource(stations);
-      this.dataSource.sort = this.sort;
+    this.stationService.currentStation.subscribe((stations) => {
+      this.dataSource = stations;
+    });
+  }
+
+  delete(station: Station) {
+    const sheetRef = this.bottomSheet.open(BottomSheetComponent, {
+      data: station
+    });
+    sheetRef.afterDismissed().subscribe(data => {
+      if (data && data.message === 'delete') {
+        this.stationService.deleteStation(station.id);
+      }
     });
   }
 

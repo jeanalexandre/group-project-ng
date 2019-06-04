@@ -20,6 +20,7 @@
 
     .table-stations {
       width: 80%;
+      text-align: center;
 
       .is-alive {
         color: forestgreen;
@@ -28,6 +29,22 @@
       .is-not-alive {
         color: indianred;
       }
+
+      .edit-btn {
+        color: #3F50B5;
+      }
+
+      .delete-btn {
+        color: black;
+      }
+
+      .icon-btn {
+        cursor: pointer;
+      }
     }
   }
+}
+
+/deep/ .mat-sort-header-container {
+  justify-content: center;
 }
