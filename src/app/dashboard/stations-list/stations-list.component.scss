@@ -22,6 +22,10 @@
       width: 80%;
       text-align: center;
 
+      .selected-station {
+        background-color: #4050b52e;
+      }
+
       .is-alive {
         color: forestgreen;
       }

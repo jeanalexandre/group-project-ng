@@ -14,6 +14,8 @@ export class StationService {
   public currentStation: Observable<Station[]>;
   private currentUpdatingStationSubject: Subject<Station>;
   public currentUpdatingStation: Observable<Station>;
+  private currentSelectedStationSubject: Subject<Station>;
+  public currentSelectedStation: Observable<Station>;
 
   constructor(private http: HttpClient,
               private toastr: ToastrService) {
@@ -21,6 +23,8 @@ export class StationService {
     this.currentStation = this.currentStationSubject.asObservable();
     this.currentUpdatingStationSubject = new Subject<Station>();
     this.currentUpdatingStation = this.currentUpdatingStationSubject.asObservable();
+    this.currentSelectedStationSubject = new Subject<Station>();
+    this.currentSelectedStation = this.currentSelectedStationSubject.asObservable();
     this.loadStations();
   }
 
@@ -52,7 +56,7 @@ export class StationService {
   }
 
   deleteStation(id: number) {
-    return this.http.delete(`${environment.apiBaseUrl}/raspberry/${id}`).subscribe(data => {
+    return this.http.delete(`${environment.apiBaseUrl}/raspberry/${id}`).subscribe(() => {
       this.toastr.success('Suppression terminée');
       this.currentStationSubject.next(this.currentStationSubject.value.filter(station => station.id !== id));
     }, err => this.toastr.error(err, 'Echec de la suppresion ...'));
@@ -60,6 +64,10 @@ export class StationService {
 
   setUpdatingStation(station: Station) {
     this.currentUpdatingStationSubject.next(station);
+  }
+
+  setSelectedStation(station: Station) {
+    this.currentSelectedStationSubject.next(station);
   }
 
   loadStations() {

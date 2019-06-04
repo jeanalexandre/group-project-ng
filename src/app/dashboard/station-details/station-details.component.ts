@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StationService } from '../../services/station.service';
+import { Station } from '../../models/station.model';
 
 @Component({
   selector: 'app-station-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StationDetailsComponent implements OnInit {
 
-  constructor() { }
+  public selectedStation: Station;
+
+  constructor(private stationService: StationService) { }
 
   ngOnInit() {
+    this.stationService.currentSelectedStation.subscribe( station => {
+      this.selectedStation = station;
+    });
   }
 
 }

@@ -17,11 +17,10 @@ export class StationsFormComponent implements OnInit {
   public title = 'AJOUTER UNE STATION';
   public stationForm: FormGroup;
   public classrooms: Classroom[];
-  public updatingStation;
+  public updatingStation: Station;
   constructor(private formBuilder: FormBuilder,
               private stationService: StationService,
               private classroomService: ClassroomService,
-              private toastr: ToastrService,
               ) { }
 
   ngOnInit() {
