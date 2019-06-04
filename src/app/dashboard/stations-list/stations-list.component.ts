@@ -37,4 +37,8 @@ export class StationsListComponent implements OnInit {
     });
   }
 
+  update(station: Station) {
+    this.stationService.setUpdatingStation(station);
+  }
+
 }

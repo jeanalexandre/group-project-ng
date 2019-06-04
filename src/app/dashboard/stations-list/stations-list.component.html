@@ -24,7 +24,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Modifier</th>
         <td mat-cell *matCellDef="let station">
           <span>
-            <mat-icon class="edit-btn icon-btn" matTooltip="modifier">edit</mat-icon>
+            <mat-icon class="edit-btn icon-btn" matTooltip="modifier" (click)="update(station)">edit</mat-icon>
           </span>
         </td>
       </ng-container>

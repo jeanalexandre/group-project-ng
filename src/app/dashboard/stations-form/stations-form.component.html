@@ -1,6 +1,6 @@
 <mat-card class="card-form">
   <mat-card-header class="title-card">
-    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-title *ngIf="!updatingStation; else updatingTemplate">{{title}}</mat-card-title>
   </mat-card-header>
   <mat-card-content class="card-content">
     <form [formGroup]="stationForm" (ngSubmit)="onSubmit()" class="station-form">
@@ -21,11 +21,21 @@
         <mat-error *ngIf="classroom.hasError('required')">Veuillez renseigner la salle</mat-error>
       </mat-form-field>
       <div class="action-form">
-        <button mat-raised-button class="reset-btn" type="reset">Annuler</button>
+        <button mat-raised-button class="reset-btn" type="reset" (click)="clearUpdating()">Annuler</button>
         <button mat-raised-button [disabled]="uid.hasError('required') || classroom.hasError('required')"
-                color="primary" type="submit">Ajouter
+                color="primary" type="submit" *ngIf="!updatingStation; else updatingBtn">Ajouter
         </button>
       </div>
     </form>
   </mat-card-content>
 </mat-card>
+
+<ng-template #updatingTemplate>
+  <mat-card-title>MODIFICATION DE LA STATION {{updatingStation.uid}}</mat-card-title>
+</ng-template>
+
+<ng-template #updatingBtn>
+  <button mat-raised-button [disabled]="uid.hasError('required') || classroom.hasError('required')"
+          color="primary" type="submit">Modifier
+  </button>
+</ng-template>

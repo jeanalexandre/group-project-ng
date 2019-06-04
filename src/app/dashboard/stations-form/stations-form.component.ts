@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { StationService } from '../../services/station.service';
 import { ClassroomService } from '../../services/classroom.service';
 import { Classroom } from '../../models/classroom.model';
+import { Observable } from 'rxjs';
+import { Station } from '../../models/station.model';
 
 @Component({
   selector: 'app-stations-form',
@@ -15,6 +17,7 @@ export class StationsFormComponent implements OnInit {
   public title = 'AJOUTER UNE STATION';
   public stationForm: FormGroup;
   public classrooms: Classroom[];
+  public updatingStation;
   constructor(private formBuilder: FormBuilder,
               private stationService: StationService,
               private classroomService: ClassroomService,
@@ -29,6 +32,13 @@ export class StationsFormComponent implements OnInit {
 
     this.classroomService.getClassrooms().subscribe( c => this.classrooms = c);
 
+    this.stationService.currentUpdatingStation.subscribe( (station) => {
+      this.updatingStation = station;
+      if (station) {
+        this.uid.setValue(station.uid);
+        this.classroom.setValue(station.classroom.id);
+      }
+    });
   }
 
   get uid() {
@@ -40,9 +50,16 @@ export class StationsFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.stationService.createStation({uid: this.uid.value, idClassroom: this.classroom.value})) {
-      this.stationForm.reset();
-      this.resetForm(this.stationForm);
+    if (this.updatingStation) {
+      if (this.stationService.updateStation(this.updatingStation.id, {uid: this.uid.value, idClassroom: this.classroom.value})) {
+        this.stationForm.reset();
+        this.resetForm(this.stationForm);
+      }
+    } else {
+      if (this.stationService.createStation({uid: this.uid.value, idClassroom: this.classroom.value})) {
+        this.stationForm.reset();
+        this.resetForm(this.stationForm);
+      }
     }
   }
 
@@ -54,6 +71,10 @@ export class StationsFormComponent implements OnInit {
       control = formGroup.controls[name];
       control.setErrors(null);
     });
+  }
+
+  clearUpdating() {
+    this.stationService.setUpdatingStation(null);
   }
 
 }
