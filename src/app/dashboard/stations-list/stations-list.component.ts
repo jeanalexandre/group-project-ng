@@ -15,6 +15,7 @@ export class StationsListComponent implements OnInit {
 
   public dataSource;
   public displayedColumns: string[] = ['uid', 'classroom', 'alive', 'modifier', 'supprimer'];
+  public selectedStation: Station;
 
   constructor(private stationService: StationService,
               private bottomSheet: MatBottomSheet) {
@@ -23,6 +24,10 @@ export class StationsListComponent implements OnInit {
   ngOnInit() {
     this.stationService.currentStation.subscribe((stations) => {
       this.dataSource = stations;
+    });
+
+    this.stationService.currentSelectedStation.subscribe( station => {
+      this.selectedStation = station;
     });
   }
 
@@ -39,6 +44,10 @@ export class StationsListComponent implements OnInit {
 
   update(station: Station) {
     this.stationService.setUpdatingStation(station);
+  }
+
+  selectStation(station: Station) {
+    this.stationService.setSelectedStation(station);
   }
 
 }
