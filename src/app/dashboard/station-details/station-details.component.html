@@ -1,3 +1,32 @@
-<p>
-  station-details works!
-</p>
+<mat-card class="details-station-card" *ngIf="selectedStation; else noStationTemplate">
+  <div class="infos-area">
+    <h1>INFORMATIONS STATION</h1>
+    <div class="infos-details">
+      <div><span class="name-attribute">UID :</span> {{selectedStation.uid}}</div>
+      <div><span class="name-attribute">Etat : </span>
+        <span *ngIf="selectedStation.alive; else notAlive" class="is-alive">
+            En fonction <mat-icon>check_circle_outline</mat-icon>
+          </span></div>
+      <div><span class="name-attribute">Date de création :</span> {{selectedStation.creationDate}}</div>
+      <div><span class="name-attribute">Derniere modification :</span> {{selectedStation.updateDate}}</div>
+    </div>
+  </div>
+  <div class="infos-area">
+    <h1>INFORMATIONS SALLE</h1>
+    <div class="infos-details">
+      <div><span class="name-attribute">Nom : </span>{{selectedStation.classroom.name}}</div>
+      <div><span class="name-attribute">Batiment : </span>{{selectedStation.classroom.batiment}}</div>
+      <div><span class="name-attribute">Adresse : </span>{{selectedStation.classroom.adresse}}</div>
+    </div>
+  </div>
+</mat-card>
+
+<ng-template #noStationTemplate>
+  <mat-card class="no-station-card">
+    Veuillez sélectionner une station dans la liste ci-dessus afin d'en visionner les informations
+  </mat-card>
+</ng-template>
+
+<ng-template #notAlive>
+  <span class="is-not-alive">Indisponible <mat-icon>highlight_off</mat-icon></span>
+</ng-template>
