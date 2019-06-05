@@ -1,0 +1,50 @@
+.card-list {
+  width: 100%;
+  height: 100%;
+  padding: 10px 0 0;
+
+  .title-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #3f50b5;
+  }
+
+  .content-card {
+    width: 100%;
+    height: 80%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    .table-courseStudents {
+      width: 80%;
+      text-align: center;
+
+      .selected-course {
+        background-color: #4050b52e;
+      }
+
+      .is-present {
+        color: forestgreen;
+      }
+
+      .is-not-present {
+        color: indianred;
+      }
+    }
+  }
+}
+
+/deep/ .mat-sort-header-container {
+  justify-content: center;
+}
+
+.no-station-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
