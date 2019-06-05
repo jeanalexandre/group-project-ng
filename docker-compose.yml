@@ -1,0 +1,17 @@
+
+version: '3.1'
+
+services:
+  docker-app:
+    build: .
+    networks:
+      - network1
+      - web
+    ports:
+      - 4200:80
+
+networks:
+  # Specifie que le network web est accessible depuis l'exterieur
+  web:
+    external: true
+  network1:
