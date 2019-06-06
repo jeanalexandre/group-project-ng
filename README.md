@@ -19,11 +19,12 @@ Tou must see this dockers up
 * db
 * front-app
 ### Play with the app 
-Go to [localhost:4200](http://localhost:4200/)
+Go to <a href="http://localhost:4200/" target="_blank">localhost:4200</a>
+
 
 ## Init data for demo
-You can generate demo data by visiting this address once the project has started
-Go to [localhost:4200/initData](http://localhost:4200/initData)
+You can generate demo data by visiting this address once the project has started<br />
+Go to <a href="http://localhost:4200/initData" target="_blank">localhost:4200/initData</a><br />
 Be careful though, it only works once !
 
 
