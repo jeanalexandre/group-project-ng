@@ -1,17 +1,65 @@
-
-version: '3.1'
+version: '3.5'
 
 services:
-  docker-app:
+  #Service de l'application back
+  group-poject-api:
+    image: florianblt/auto-pres-check-api:latest
+    ports:
+      - 3030:3000
+    environment:
+      ## API
+      API_PORT: 3000
+      API_HOST: localhost
+      API_PROTOCOL: http
+      ## LOGGER
+      LOG_LEVEL: debug
+      LOG_SQL_REQUEST: 'false'
+      ## DB
+      DATABASE_URL: postgres://typeormtest:password@db:5432/typeormtest
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: typeormtest
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: typeormtest
+      ## AUTHENTICATION [JWT]
+      JWT_SECRET: mysecretkey
+    depends_on:
+      - db
+    networks:
+      - intra
+      - web
+
+  #Service de bdd postgres
+  db:
+    image: 'postgres:10'
+    restart: 'always'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_USER: 'typeormtest'
+    networks:
+      - intra
+
+  #Service de adminer (gestionnaire de bdd
+  adminer:
+    image: 'adminer'
+    restart: 'always'
+    ports:
+      - 8080:8080
+    networks:
+      - intra
+
+  #Service du front angular
+  front-app:
     build: .
     networks:
-      - network1
       - web
     ports:
       - 4200:80
 
+#Specifie que le network web est accessible depuis l'exterieur
 networks:
-  # Specifie que le network web est accessible depuis l'exterieur
+  intra:
   web:
     external: true
-  network1:
