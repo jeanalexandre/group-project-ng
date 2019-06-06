@@ -21,14 +21,9 @@ Tou must see this dockers up
 ### Play with the app 
 Go to [localhost:4200](http://localhost:4200/)
 
-## Init data from python script
-###Requirements
-* Have python installed [link to python](https://www.python.org/)
-* Have request python library installed [link to pip](https://pypi.org/project/pip/)
-###Commands
-````console
-cd init-data
-python initData.py
-````
+## Init data for demo
+You can generate demo data by visiting this address once the project has started
+Go to [localhost:4200/initData](http://localhost:4200/initData)
+Be careful though, it only works once !
 
 
