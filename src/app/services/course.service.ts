@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CourseStudent } from '../models/course-student.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,9 @@ export class CourseService {
       .subscribe(courses => {
         this.currentCourseSubject.next(courses);
       });
+  }
+
+  createCourse(course) {
+    return this.http.post<Course>(`${environment.apiBaseUrl}/course`, course);
   }
 }

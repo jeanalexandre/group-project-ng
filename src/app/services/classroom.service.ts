@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../environments/environment';
 import { Classroom } from '../models/classroom.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,17 @@ export class ClassroomService {
     return this.currentClassroomSubject;
   }
 
+  createClassroom(classroom) {
+    return this.http.post<Classroom>(`${environment.apiBaseUrl}/classroom`, classroom);
+  }
+
+  createPromo(promo) {
+    return this.http.post<Classroom>(`${environment.apiBaseUrl}/promo`, promo);
+  }
+
+  addUserToPromo(promoId, userId) {
+    return this.http.post<Classroom>(`${environment.apiBaseUrl}/promo/${promoId}/addStudent/${userId}`, '');
+  }
 
   getClassrooms(): Observable<Classroom[]> {
     return this.http.get<Classroom[]>(`${environment.apiBaseUrl}/classroom`);

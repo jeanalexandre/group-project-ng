@@ -1,0 +1,10 @@
+<div *ngIf="counter < 6; else backHome" class="full-width">
+  <mat-spinner class="full-width" *ngIf="counter < 6; else backHome"></mat-spinner>
+</div>
+<ng-template #backHome>
+  <mat-card class="full-width">
+    Initation of data is a success !!
+    <button mat-raised-button color="primary" (click)="logout()">Back to Home</button>
+  </mat-card>
+</ng-template>
+

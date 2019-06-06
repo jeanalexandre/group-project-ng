@@ -64,9 +64,9 @@ export class RegisterComponent implements OnInit {
       firstName: this.firstName.value,
       lastName: this.lastName.value,
       roles: ['DEFAULT_USER', 'ADMIN_USER'],
+    }).subscribe(() => {
+      this.router.navigate(['/login']);
     });
-
-    this.router.navigate(['/login']);
 
   }
 
