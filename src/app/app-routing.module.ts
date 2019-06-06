@@ -16,7 +16,11 @@ const routes: Routes = [
     path: 'courses',
     loadChildren:
       './course-dashboard/course-dashboard.module#CourseDashboardModule'
-  }
+  },
+  {
+    path: 'initData',
+    loadChildren: './init-data/init-data.module#InitDataModule'
+  },
 ];
 
 @NgModule({

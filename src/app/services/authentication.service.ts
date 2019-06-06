@@ -37,9 +37,7 @@ export class AuthenticationService {
   }
 
   register(register) {
-    this.http.post<User>(`${environment.apiBaseUrl}/auth/register`, register).subscribe(user => {
-      return user;
-    });
+    return this.http.post<User>(`${environment.apiBaseUrl}/auth/register`, register);
   }
 
   logout() {
